@@ -9,4 +9,5 @@ services:
         APPNAME: heimdall
     volumes:
       - './config/local:/data/host:ro'
+    network_mode: host
     env_file: ./config/local/.env
