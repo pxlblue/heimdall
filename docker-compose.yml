@@ -1,13 +1,23 @@
 version: '3'
 
 services:
+  graphite:
+    image: graphiteapp/graphite-statsd:latest
+    restart: always
+    container_name: graphite
+    ports:
+      - 8080:80
+      - 2003-2004:2003-2004
+      - 2023-2024:2023-2024
+      - 8125:8125/udp
   heimdall:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         APPNAME: heimdall
+    depends_on:
+      - graphite
     volumes:
       - './config/local:/data/host:ro'
-    network_mode: host
     env_file: ./config/local/.env
