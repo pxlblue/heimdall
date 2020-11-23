@@ -10,7 +10,7 @@ RUN go build -a -ldflags '-extldflags "-static"' -o /$APPNAME . && ls /$APPNAME 
 
 FROM debian:stretch
 
-COPY --from=bin /$APPNAME /heimdall
+COPY --from=bin /$APPNAME/heimdall /heimdall
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y ca-certificates && update-ca-certificates
 RUN ls -la / && ls -la /heimdall
